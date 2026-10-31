@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+/* ─── Neural Guard Design System ──────────────────────────────── */
+
+@theme {
+  --color-navy-950: #0a0e1a;
+  --color-navy-900: #0f1629;
+  --color-navy-800: #151d35;
+  --color-navy-700: #1e2a4a;
+  --color-navy-600: #283660;
+  --color-navy-500: #3a4d7a;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background: var(--color-navy-950);
+    color: var(--color-slate-300);
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-navy-900);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-navy-600);
+    border-radius: 3px;
+  }
+}
+
+/* ─── Glass Card ──────────────────────────────────────────────── */
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 22, 41, 0.8),
+    rgba(21, 29, 53, 0.6)
+  );
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  border-color: rgba(34, 211, 238, 0.25);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.05);
+}
+
+/* ─── Risk badges ─────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge-normal {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+.badge-suspicious {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.badge-high-anomaly {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.badge-insufficient {
+  background: rgba(100, 116, 139, 0.15);
+  color: #94a3b8;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+/* ─── Stat Card ───────────────────────────────────────────────── */
+.stat-card {
+  padding: 20px 24px;
+}
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--color-slate-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* ─── Pulse animation for scan progress ──────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(34, 211, 238, 0); }
+}
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ─── Fade In ─────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* ─── Nav link ────────────────────────────────────────────────── */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--color-slate-400);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.nav-link:hover {
+  background: rgba(34, 211, 238, 0.08);
+  color: var(--color-slate-300);
+}
+.nav-link.active {
+  background: rgba(34, 211, 238, 0.12);
+  color: var(--color-cyan-400);
+  border-left: 3px solid var(--color-cyan-400);
+}
+
+/* ─── Button ──────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, var(--color-cyan-600), var(--color-blue-500));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--color-slate-300);
+  border: 1px solid var(--color-navy-600);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  border-color: var(--color-cyan-500);
+  color: var(--color-cyan-400);
+}
+
+/* ─── Drop zone ───────────────────────────────────────────────── */
+.drop-zone {
+  border: 2px dashed var(--color-navy-600);
+  border-radius: 16px;
+  padding: 48px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.drop-zone:hover,
+.drop-zone.active {
+  border-color: var(--color-cyan-500);
+  background: rgba(34, 211, 238, 0.05);
+}
+
+/* ─── Table ───────────────────────────────────────────────────── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-slate-400);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+}
+.data-table td {
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.data-table tr:hover td {
+  background: rgba(34, 211, 238, 0.03);
+}
+
+/* ─── Progress bar ────────────────────────────────────────────── */
+.progress-bar {
+  height: 6px;
+  background: var(--color-navy-700);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-cyan-500), var(--color-blue-400));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* ─── Score ring ──────────────────────────────────────────────── */
+.score-ring {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
